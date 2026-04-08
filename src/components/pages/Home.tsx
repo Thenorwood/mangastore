@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import type {Manga} from "../../types/Manga.tsx";
 import {Link} from "react-router";
+import ChatWidget from "../ChatWidget.tsx";
 
 export default function Home(){
     const [manga, setManga] = useState<Manga[]>([])
@@ -20,6 +21,8 @@ export default function Home(){
     return(
         <>
             <h1>Home</h1>
+
+            <ChatWidget />
 
             {manga.length > 0 &&(
                 manga.map (manga => (
