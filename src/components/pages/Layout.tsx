@@ -1,31 +1,56 @@
-import {Link, Outlet} from "react-router";
+import { Link, Outlet } from "react-router";
 
 export default function Layout() {
     return(
-        <div className="container-fluid">
+        <div className="d-flex flex-column min-vh-100 bg-light">
+
+            {/* HEADER / NAVBAR */}
             <header>
-                <nav className="navbar mb-4">
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-4">
                     <div className="container-fluid">
-                        <Link to="/" className="navbar-brand">
-                            <i className="bi bi-book"></i> Manga Repository
+
+                        <Link to="/" className="navbar-brand fw-bold fs-4">
+                            <i className="bi bi-book-half me-2"></i>
+                            Manga Repository
                         </Link>
 
-                        <div className="d-flex">
-                            <Link to="/cart" className="text-reset fs-4">
-                                <i className="bi bi-cart4"></i>
+                        <div className="d-flex align-items-center gap-3">
+
+                            <Link to="/" className="nav-link text-light">
+                                Home
                             </Link>
+
+                            <Link to="/cart" className="btn btn-outline-light">
+                                <i className="bi bi-cart4 me-1"></i>
+                                Cart
+                            </Link>
+
                         </div>
+
                     </div>
                 </nav>
+
+                {/* STORE BANNER */}
+                <div className="bg-secondary text-white text-center py-4">
+                    <h2 className="fw-bold mb-1">Your Online Manga Store</h2>
+                    <p className="mb-0">Browse and collect your favourite series</p>
+                </div>
             </header>
 
-            <main className="container-fluid">
+
+            {/* MAIN CONTENT */}
+            <main className="flex-grow-1">
                 <Outlet/>
             </main>
 
-            <footer className="container-fluid mt-5">
-                Manga Repository, &copy; 2026
+
+            {/* FOOTER */}
+            <footer className="bg-dark text-light text-center py-3 mt-auto">
+                <div className="container">
+                    Manga Repository &copy; 2026
+                </div>
             </footer>
+
         </div>
     )
 }
