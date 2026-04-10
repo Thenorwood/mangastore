@@ -50,6 +50,8 @@ export default function Cart() {
         void loadCart();
     }, []);
 
+
+    //remove items from cart
     const handleRemoveFromCart = (id: number) => {
         const updatedCartItems = cartItems.filter((item) => item.id !== id);
 
@@ -106,6 +108,8 @@ export default function Cart() {
                                             </div>
                                         </div>
 
+
+
                                         <div className="col-md-3">
                                             <div className="card-body text-md-end">
                                                 <button
@@ -116,6 +120,8 @@ export default function Cart() {
                                                 </button>
                                             </div>
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
