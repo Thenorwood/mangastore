@@ -9,6 +9,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+head {
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+/>
+}
+
 .hero-banner {
   width: 100%;
   margin: 0;
@@ -19,6 +26,27 @@
   width: 100%;
   height: auto;
   display: block;
+}
+
+.manga-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.manga-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.volume-button {
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.volume-button:hover {
+  transform: translateY(-2px);
+}
+
+body {
+  background-color: #f4f6f8;
 }
 
 html,
@@ -37,3 +65,4 @@ body {
 a {
   text-decoration: none;
 }
+

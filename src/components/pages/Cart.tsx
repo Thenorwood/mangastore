@@ -5,7 +5,7 @@ import type { Manga } from "../../types/Manga.tsx";
 import type { Cart, CartItem } from "../../types/Cart.tsx";
 
 type CartDisplayItem = Manga & {
-    quantity: number;
+    selectedVolumes: number[];
 };
 
 export default function Cart() {
@@ -17,7 +17,7 @@ export default function Cart() {
     useEffect(() => {
         const loadCart = async () => {
             const raw = Cookies.get(COOKIE_KEY);
-            const cart: Cart = raw ? JSON.parse(raw) : {items: []};
+            const cart: Cart = raw ? JSON.parse(raw) : { items: [] };
 
             setCartItems(cart.items);
 
@@ -39,7 +39,7 @@ export default function Cart() {
 
                     return {
                         ...manga,
-                        quantity: cartItem.quantity
+                        selectedVolumes: cartItem.selectedVolumes
                     };
                 })
                 .filter((item): item is CartDisplayItem => item !== null);
@@ -50,8 +50,6 @@ export default function Cart() {
         void loadCart();
     }, []);
 
-
-    //remove items from cart
     const handleRemoveFromCart = (id: number) => {
         const updatedCartItems = cartItems.filter((item) => item.id !== id);
 
@@ -59,7 +57,7 @@ export default function Cart() {
             items: updatedCartItems
         };
 
-        Cookies.set(COOKIE_KEY, JSON.stringify(updatedCart), {expires: 1});
+        Cookies.set(COOKIE_KEY, JSON.stringify(updatedCart), { expires: 1 });
 
         setCartItems(updatedCartItems);
         setDisplayItems((prev) => prev.filter((item) => item.id !== id));
@@ -99,16 +97,21 @@ export default function Cart() {
                                         <div className="col-md-7">
                                             <div className="card-body">
                                                 <h4 className="card-title mb-2">{item.title}</h4>
-                                                <p className="card-text mb-1">
-                                                    <strong>Quantity:</strong> {item.quantity}
+
+                                                <p className="card-text mb-2">
+                                                    <strong>Volumes:</strong>{" "}
+                                                    {item.selectedVolumes.map((v) => (
+                                                        <span key={v} className="badge bg-dark me-1">
+        {v}
+    </span>
+                                                    ))}
                                                 </p>
+
                                                 <p className="card-text text-muted mb-0">
                                                     {item.description}
                                                 </p>
                                             </div>
                                         </div>
-
-
 
                                         <div className="col-md-3">
                                             <div className="card-body text-md-end">
@@ -120,18 +123,27 @@ export default function Cart() {
                                                 </button>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    <div className="mt-4 text-end">
+                    <div className="mt-5 pt-4 border-top d-flex justify-content-between">
+
+                        {/* back */}
+                        <button
+                            className="btn btn-outline-secondary"
+                            onClick={() => window.history.back()}
+                        >
+                            Back
+                        </button>
+
+                        {/* checkout */}
                         <Link to="/checkout" className="btn btn-primary btn-lg">
                             Proceed to Checkout
                         </Link>
+
                     </div>
                 </>
             )}

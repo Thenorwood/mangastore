@@ -6,4 +6,5 @@ export type Manga = {
     title: string
     description: string
     imgFilename: string
+    volumes:number
 }

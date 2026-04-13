@@ -10,7 +10,12 @@ export default function Home(){
         const fetchData = async () => {
             const res = await fetch('http://localhost:8080/Manga/');
             const manga = await res.json();
-            setManga(manga)
+
+            manga.sort((a: Manga, b: Manga) =>
+                a.title.localeCompare(b.title)
+            );
+
+            setManga(manga);
         }
 
         fetchData()
@@ -28,16 +33,18 @@ export default function Home(){
             </div>
 
             <div className="container py-4">
-                <div className="mb-4">
-                    <h1>Home</h1>
-                    <p className="text-muted">Browse the manga collection.</p>
+                <div className="mb-4 text-center">
+                    <h1 className="fw-bold">Browse Manga</h1>
+                    <p className="text-muted mb-0">
+                        Explore popular series and build your collection.
+                    </p>
                 </div>
 
                 <div className="row g-4">
                     {manga.length > 0 &&
                         manga.map((manga) => (
                             <div key={manga.id} className="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div className="card h-100 shadow-sm">
+                                <div className="card h-100 shadow-sm manga-card">
                                     <div style={{ height: "420px", overflow: "hidden" }}>
                                         <img
                                             src={`http://localhost:8080/images/${manga.imgFilename}`}
@@ -51,7 +58,7 @@ export default function Home(){
                                     </div>
 
                                     <div className="card-body text-center">
-                                        <h5 className="card-title">{manga.title}</h5>
+                                        <h5 className="card-title fw=semibold">{manga.title}</h5>
 
                                         <Link
                                             to={`/details/${manga.id}`}

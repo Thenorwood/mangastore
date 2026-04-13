@@ -1,8 +1,8 @@
-export interface CartItem {
+export type CartItem = {
     id: number;
-    quantity:number;
-}
+    selectedVolumes: number[];
+};
 
-export interface Cart {
+export type Cart = {
     items: CartItem[];
-}
+};
